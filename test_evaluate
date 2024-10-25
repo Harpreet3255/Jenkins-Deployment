@@ -1,0 +1,25 @@
+import unittest
+from model import build_model
+import numpy as np
+from sklearn.metrics import accuracy_score
+
+class TestEvaluation(unittest.TestCase):
+
+    def test_evaluation_process(self):
+        # Define dummy test dataset
+        X_test = np.random.randint(1000, size=(10, 100))
+        y_test = np.random.randint(2, size=(10, 1))
+
+        model = build_model(input_dim=1000, output_dim=128, input_length=100)
+        
+        # Run a dummy prediction (assuming a saved model in practical use)
+        predictions = (model.predict(X_test) > 0.5).astype("int32")
+        
+        # Calculate accuracy
+        accuracy = accuracy_score(y_test, predictions)
+        
+        # Check accuracy score type
+        self.assertIsInstance(accuracy, float, "Accuracy should be a float")
+
+if __name__ == '__main__':
+    unittest.main()

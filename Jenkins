@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    environment {
+        PYTHON_ENV = 'venv' // Optional: virtual environment name
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Clone the repository
+                git 'https://github.com/Harpreet3255/fake-news-classifier.git'
+            }
+        }
+
+        stage('Setup Python Environment') {
+            steps {
+                // Set up a virtual environment and install dependencies
+                sh 'python -m venv ${PYTHON_ENV}'
+                sh '. ${PYTHON_ENV}/bin/activate && pip install -r requirements.txt'
+            }
+        }
+
+        stage('Train Model') {
+            steps {
+                // Train the model
+                sh '. ${PYTHON_ENV}/bin/activate && python train.py'
+            }
+        }
+
+        stage('Evaluate Model') {
+            steps {
+                // Evaluate the model
+                sh '. ${PYTHON_ENV}/bin/activate && python evaluate.py'
+            }
+        }
+
+        stage('Deploy Model') {
+            steps {
+                // Deploy the model
+                sh '. ${PYTHON_ENV}/bin/activate && python deploy_model.py'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline completed successfully!"
+        }
+        failure {
+            echo "Pipeline failed."
+        }
+    }
+}
