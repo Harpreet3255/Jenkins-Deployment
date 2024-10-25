@@ -1,16 +1,24 @@
 import unittest
-from model import build_model
+from tensorflow.keras.models import load_model
+import numpy as np
 
-class TestModel(unittest.TestCase):
+class TestSavedModel(unittest.TestCase):
 
-    def test_model_architecture(self):
-        model = build_model(input_dim=5000, output_dim=128, input_length=100)
-        
-        # Check the model has layers
-        self.assertGreater(len(model.layers), 0, "Model should have layers")
-        
-        # Check the output shape of the model
+    def test_model_loading(self):
+        # Load the model
+        model = load_model('text_classification.h5')
         self.assertEqual(model.output_shape, (None, 1), "Model output shape should be (None, 1) for binary classification")
+
+    def test_model_prediction(self):
+        # Load the model
+        model = load_model('text_classification.h5')
+        
+        # Generate dummy input data within the model's vocabulary range
+        dummy_data = np.random.randint(0, 1000, size=(1, 100))
+        
+        # Test prediction
+        prediction = model.predict(dummy_data)
+        self.assertEqual(prediction.shape, (1, 1), "Prediction output should be (1, 1) for binary classification")
 
 if __name__ == '__main__':
     unittest.main()
