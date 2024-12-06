@@ -1,0 +1,7 @@
+---
+- name: Deploy text classification model
+  hosts: servers
+  become: yes
+
+  roles:
+    - deploy_model
