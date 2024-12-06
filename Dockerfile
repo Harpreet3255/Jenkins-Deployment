@@ -18,7 +18,9 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the application code and the Ansible playbook
-COPY . .
+COPY ansible playbook.yml
+COPY tests/test_model.py /app/tests/test_model.py
+
 
 # Expose the port the app will run on (optional, for if you want to run a web app inside the container)
 # EXPOSE 8080
