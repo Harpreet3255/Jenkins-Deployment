@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone the repository
-                git 'https://github.com/Harpreet3255/JENKINS DEPLOYMENT.git'
+                git 'https://github.com/Harpreet3255/JENKINS-DEPLOYMENT.git'
             }
         }
 
@@ -20,6 +20,13 @@ pipeline {
             steps {
                 // Run the unit tests to verify the model loads and predicts correctly
                 sh 'pytest tests/test_model.py'
+            }
+        }
+
+        stage('Run Ansible Playbook') {
+            steps {
+                // Run the Ansible playbook for deployment
+                sh 'ansible-playbook -i inventory main.yml'
             }
         }
     }
