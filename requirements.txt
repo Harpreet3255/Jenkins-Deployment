@@ -1,19 +1,6 @@
-# Core Libraries
-numpy==1.24.3
-pandas==1.5.3
-
-# Data Preprocessing
-nltk==3.8.1               # For text processing (tokenization, stopwords, etc.)
-
-# Deep Learning
-tensorflow==2.13.0        # For building and training the LSTM model
-keras==2.13.0             # Keras is included within TensorFlow, so this is optional
-
-# Model Evaluation
-scikit-learn==1.2.0       # For metrics and evaluation tools
-
-# Jupyter Notebook (for running notebooks, if needed)
-jupyter==1.0.0
-
-# Additional utilities
-matplotlib==3.7.2         # For plotting training/evaluation metrics
+pandas==2.1.2
+numpy==1.23.5
+matplotlib==3.8.0
+seaborn==0.12.2
+tensorflow==2.14.0
+scikit-learn==1.2.2
